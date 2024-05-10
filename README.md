@@ -1,44 +1,37 @@
-#Exchange Rate APP
+Exchange Rate App
 
-În cadrul acestui proiect am realizat o aplicație care are ca scop returnarea sumei reieșite în urma unui schimb valutar, pe baza unei sume de bani introdusă, moneda în care este suma respectivă și moneda în care vrei sa schimbi suma. În final rezultatul acestui proces de Exchange Rate este trimis pe mail către un destinatar pe care îl putem alege.
 
-Pentru a avea informațiile legate de ratele de schimb valutar am folosit API-ul site-ului Apilayer (https://apilayer.com/marketplace/description/exchangerates_data-api#authentication). Logica din spate este că atunci când completăm cu Suma de bani, moneda acelei sume și moneda în care vrem să schimbăm banii respectivi se va returna un JSON cu calculul noii sume de bani. API Key-ul site-ului utilizat este salvat în fișierul .env și este utilizat atunci când facem un request ca url.
+Introducere
 
-Pentru partea de trimitere a mail-urilor am utilizat API-ul de la SendGrid (https://sendgrid.com/). Contul care trimite mail-urile este adresa de student de email și ca parametrii de request mai avem: numele expeditorului, adresa de email și mesajul care reprezintă rezultatul schimbului valutar.
+Aplicația realizată pentru proiect are rolul de a face conversii din diferite value monetare și poate trimite pe mail rezultatele, datorită unor API-uri publice. Această aplicație utilizează două servicii în cloud și anume: 
+Exchange Rates Data API – folosit pentru a face conversia din valutele monetare; 
+API SendGrid– folosit pentru a trimite pe mail informațiile cu privință la cursurile valutare;
 
-În screenshot-ul de mai jos putem vedea baza de date utilizata pentru stocarea mail-urilor trimise:
- ![image](https://user-images.githubusercontent.com/105487372/168451188-a83f2b6c-d4d7-4e29-b4b0-98c2f17e9c23.png)
+Link-uri Github:
+Front: https://github.com/CosminSarafu/CloudFront
+Back: https://github.com/CosminSarafu/CloudBack
 
-Metodele HTTP folosite
-Get all Messages – Ne returnează mail-urile salvate în baza de date
- ![image](https://user-images.githubusercontent.com/105487372/168451190-fce54231-1cb3-4790-8e58-9ca267434e51.png)
+Descriere problemă
+Exchange Rate- aplicația de curs valutar
 
-Get Message by ID – Returnează detaliile mail-ului pentru un ID ales
- ![image](https://user-images.githubusercontent.com/105487372/168451200-736a9330-348f-41bb-ac2c-eab3f78d8f76.png)
+Exchange Rate este platforma dumneavoastră digitală care vă realizează conversiile din diferite monede în alte valute, fiind actualizată automat zilnic rata de schimb valutar, facilitând conversiile rapide. Cu o interfață intuitivă și actualizări în timp real, utilizatorii pot accesa cu ușurință informațiile de care au nevoie pentru a lua decizii financiare informate.
 
-Get exchange rate – Calculeaza Exchange Rate-ul și-l returnează
- ![image](https://user-images.githubusercontent.com/105487372/168451207-95b42ce5-b702-41b2-bbe0-92157c276f8e.png)
+Tehnologii folosite
 
-Delete by ID - Stergerea unei înregistrări din baza de date
- ![image](https://user-images.githubusercontent.com/105487372/168451212-53a50b8d-1d85-4eac-9be4-17ad3046f0b4.png)
+API SendGrid - este o platformă puternică de trimitere a emailurilor, care oferă dezvoltatorilor o gamă largă de instrumente pentru a gestiona și trimite mesaje electronice în mod eficient și fiabil. Cu ajutorul API-ului SendGrid, utilizatorii pot integra ușor funcționalități avansate de trimitere a emailurilor în aplicațiile lor, inclusiv trimiterea de emailuri personalizate, gestionarea listelor de destinatari, urmărirea interacțiunilor cu emailurile și multe altele. API-ul este bine documentat și ușor de utilizat, permițând dezvoltatorilor să își personalizeze și să își automatizeze complet fluxurile de lucru legate de emailuri. Pe lângă funcționalitățile de bază ale trimiterii de emailuri, API-ul SendGrid oferă și caracteristici avansate, cum ar fi segmentarea avansată a destinatarilor, testarea A/B, rapoartele detaliate și integrările cu alte platforme populare de marketing și CRM. Fiabilitatea și scalabilitatea sunt puncte forte ale acestui API, care poate gestiona cu ușurință volume mari de tranzacții de emailuri, asigurând livrarea lor în timp util și în conformitate cu cele mai înalte standarde de securitate și conformitate. Prin utilizarea API-ului SendGrid, dezvoltatorii pot îmbunătăți semnificativ experiența utilizatorilor lor în ceea ce privește comunicarea prin emailuri, construind în același timp aplicații mai eficiente și mai fiabile.
 
-Aplicația arată precum în screenshot-ul de mai jos. Userii vor avea de introdus:
--moneda sumei pe care vor să o schimbe în câmpul Base Currency
--moneda în care vor să schimbe suma în câmpul Exchange Currency
--suma pe care vor să o schimbe în câmpul Amount 
- ![image](https://user-images.githubusercontent.com/105487372/168451222-ebfaba2a-625a-486b-9ae9-f4dd6043d6dd.png)
+Exchange Rates Data API - oferă dezvoltatorilor acces la date actualizate și istorice privind ratele de schimb valutar. Acesta furnizează informații precise și actualizate despre conversiile valutare între diverse monede, facilitând astfel dezvoltarea de aplicații și servicii care implică tranzacții financiare internaționale. Prin intermediul acestui API, dezvoltatorii pot integra ușor funcționalități legate de ratele de schimb în aplicațiile lor, cum ar fi calculatoarele valutare, aplicațiile de contabilitate sau platformele de comerț electronic, oferind astfel utilizatorilor o experiență mai fluentă și mai precisă în gestionarea tranzacțiilor valutare.
 
-După ce userii completează câmpurile menționate mai sus vor apăsa pe butonul Calculate care va returna suma dorită.
- ![image](https://user-images.githubusercontent.com/105487372/168451225-462720d3-bca8-445d-a37f-acfb4150e4f0.png)
+Metodele HTTP sunt modalități standardizate de comunicare între client și server în cadrul unei aplicații web, fiecare având un scop specific în gestionarea datelor și acțiunilor pe resursele serverului. În cadrul acestei aplicații, sunt utilizate următoarele metode:
 
-Pentru trimiterea acestei informații pe mail, tot ce avem de făcut este să completăm câmpurile Your Name și Receiver Mail și să apăsăm pe butonul Send Mail.
- ![image](https://user-images.githubusercontent.com/105487372/168451234-00a792bf-4da3-4a38-91a5-f652d1216000.png)
-![image](https://user-images.githubusercontent.com/105487372/168451239-056a7129-4eba-4024-a574-054c9ee98af0.png)
+GET (Citire): Această metodă este folosită pentru a obține date de la server. De exemplu, atunci când un client solicită pagina principală a unei aplicații web, utilizează metoda GET pentru a primi informațiile corespunzătoare din baza de date și a le afișa utilizatorului.
 
- 
+POST (Creare): Metoda POST este utilizată pentru a trimite date către server pentru a crea resurse noi în baza de date. De exemplu, atunci când un utilizator completează un formular de înregistrare și apasă butonul de "Înregistrare", datele introduse sunt trimise către server folosind metoda POST pentru a crea un nou cont în baza de date.
 
-Bibliografie: Seminar Cloud Computing, https://apilayer.com/marketplace/description/exchangerates_data-api#authentication
+PUT (Actualizare): Metoda PUT este folosită pentru a actualiza datele unei resurse existente pe server. De exemplu, atunci când un utilizator își actualizează profilul într-o aplicație, datele actualizate sunt trimise către server folosind metoda PUT pentru a actualiza înregistrarea corespunzătoare în baza de date.
 
-Link youtube: https://youtu.be/4N_An1JMzdw 
+DELETE (Ștergere): Această metodă este utilizată pentru a șterge o resursă existentă pe server. De exemplu, atunci când un utilizator decide să șteargă un element din lista sa de produse favorite într-o aplicație de comerț electronic, cererea de ștergere este trimisă către server folosind metoda DELETE pentru a elimina înregistrarea corespunzătoare din baza de date.
 
-Link heroku back: https://secret-badlands-38290.herokuapp.com/  link heroku front: https://pure-wave-25008.herokuapp.com/
+Aceste operații CRUD (Create, Read, Update, Delete) reprezintă acțiunile fundamentale pe care le poate efectua un client asupra resurselor unei aplicații web și sunt esențiale în comunicarea între client și server pentru gestionarea datelor.
+
+Capturi ecran platforme utilizate și aplicație
